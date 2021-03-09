@@ -1,57 +1,8 @@
-html{
-    height: 100%;
-    width: 100%;
-}
-body{
-    background: url("https://i.pinimg.com/originals/b7/4b/2d/b74b2dfeca58f0955c51876c24fcf227.jpg") no-repeat center center fixed;
+.masthead {
+    height: 100vh;
+    min-height: 500px;
+    background-image: url('bg.png');
     background-size: cover;
-    /*background-color: #1A1A1A;*/
-    font-family: 'Comfortaa', sans-serif;
-    height: 100%;
-    width: 100%;
-}
-.row{
-    float: left;
-    height:40%
-}
-.container-light{
-    box-shadow: 5px 5px 5px 1px #888888;
-    background-color: #FFFFFF;
-    color: black;
-}
-.container-dark{
-    box-shadow: 5px 5px 5px 1px #111111;
-    background-color: #1A1A1A;
-    color: white;
-}
-.body-text{
-    margin: 20px;
-    background:linear-gradient(transparent 150px, #1A1A1A);
-}
-.container{
-    overflow: hidden;
-    margin: 20px;
-    /*border-width: 2px;*/
-    float: left;
-    border-radius: 25px;
-    /*padding: 20px;*/
-}
-.container-extra-large{
-    width: 60%;
-    height: auto;
-}
-.container-large{
-    width: 50%;
-    height: auto;
-}
-.container-medium{
-    width: 40%;
-    height: auto;
-}
-.container-small{
-    width: 30%;
-    height: auto;
-}
-.title{
-    text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
 }
