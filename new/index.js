@@ -11,10 +11,11 @@ function drag(e2) {
 	var p1 = 0, p2 = 0, p3 = 0, p4 = 0;
 	document.getElementById(e2.id + "header").onmousedown = dragMouseDown;
 	e2.onmousedown = dragMouseDown;
-	
+	e2.style.zIndex = 0;
 	function dragMouseDown(e) {
 		e = e || window.event;
 		p3 = e.clientX, p4 = e.clientY;
+		e2.style.zIndex++;
 		document.onmouseup = closeDragElement;
 		document.onmousemove = elementDrag;
 	}
@@ -31,6 +32,9 @@ function drag(e2) {
 	}
 	
 	function closeDragElement() {
+		console.log(e2.id + " " + e2.style.zIndex);
+		e2.style.zIndex-=1;
+		console.log(e2.style.zIndex)
 		document.onmouseup = null;
 		document.onmousemove = null;
 	}

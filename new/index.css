@@ -56,5 +56,9 @@ ul.navbar :is(.navlink, .rightlink) a:hover {
 	z-index: 10;
 	background-color: #0a0a0a;
 	color: #FFFFFF;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
