@@ -17,8 +17,9 @@ function drag(e2) {
 		p3 = e.clientX, p4 = e.clientY;
 		var max = 0;
 		l = document.getElementsByClassName("window");
-		[].forEach.call(l, (e) => {max = e.style.zIndex > max ? e.style.zIndex : max});
-		e2.style.zIndex = max + 1;
+		[].forEach.call(l, (t) => {max = parseInt(t.style.zIndex) > max ? parseInt(t.style.zIndex) : max});
+		e2.style.zIndex = parseInt(max) + 1;
+		console.log(e2.style.zIndex);
 		document.onmouseup = closeDragElement;
 		document.onmousemove = elementDrag;
 	}
