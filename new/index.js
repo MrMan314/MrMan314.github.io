@@ -15,7 +15,10 @@ function drag(e2) {
 	function dragMouseDown(e) {
 		e = e || window.event;
 		p3 = e.clientX, p4 = e.clientY;
-		e2.style.zIndex++;
+		var max = 0;
+		l = document.getElementsByClassName("window");
+		[].forEach.call(l, (e) => {max = e.style.zIndex > max ? e.style.zIndex : max});
+		e2.style.zIndex = max + 1;
 		document.onmouseup = closeDragElement;
 		document.onmousemove = elementDrag;
 	}
@@ -32,9 +35,6 @@ function drag(e2) {
 	}
 	
 	function closeDragElement() {
-		console.log(e2.id + " " + e2.style.zIndex);
-		e2.style.zIndex-=1;
-		console.log(e2.style.zIndex)
 		document.onmouseup = null;
 		document.onmousemove = null;
 	}
