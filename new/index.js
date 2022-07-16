@@ -15,10 +15,12 @@ function drag(e2) {
 	function dragMouseDown(e) {
 		e = e || window.event;
 		p3 = e.clientX, p4 = e.clientY;
-		var max = 0;
+		var max = 0, min = 2147483647;
 		l = document.getElementsByClassName("window");
 		[].forEach.call(l, (t) => {max = parseInt(t.style.zIndex) > max ? parseInt(t.style.zIndex) : max});
+		[].forEach.call(l, (t) => {min = parseInt(t.style.zIndex) < min ? parseInt(t.style.zIndex) : min});
 		e2.style.zIndex = parseInt(max) + 1;
+		[].forEach.call(l, (t) => {t.style.zIndex -= min});
 		console.log(e2.style.zIndex);
 		document.onmouseup = closeDragElement;
 		document.onmousemove = elementDrag;
