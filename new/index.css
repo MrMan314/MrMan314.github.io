@@ -26,6 +26,10 @@ li.rightlink {
 	float: right;
 }
 
+li.centerlink {
+	float: center;
+}
+
 ul.navbar :is(.navlink, .rightlink) a {
 	border-radius: 25px;
 	display: block;
@@ -45,16 +49,16 @@ ul.navbar :is(.navlink, .rightlink) a:hover {
 	z-index: 9;
 	background-color: 050505;
 	text-align: center;
-	border-radius: 10px;
+	border-radius: 25px;
 	border-collapse: separate;
 	overflow: hidden;
 }
 
 .windowheader {
-	padding: 10px;
+/*	padding: 10px;*/
 	cursor: move;
 	z-index: 10;
-	background-color: #0a0a0a;
+	background-color: #050505;
 	color: #FFFFFF;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -62,3 +66,59 @@ ul.navbar :is(.navlink, .rightlink) a:hover {
 	user-select: none;
 }
 
+.windowicon {
+	float: left;
+	height: 100%;
+}
+.windowbuttons {
+	float: right;
+	height: 100%;
+}
+
+.forminput {
+	width: 100%;
+	border: 2px solid white;
+	padding: 2px;
+	border-radius: 10px;
+	background-color: #050505;
+	color: #FFFFFF;
+	padding-top: 5px;
+	resize: none;
+	font-family: 'Comfortaa', cursive;
+	transition: 0.5s;
+	outline: none;
+}
+
+*:hover *:focus {
+	outline: none;
+}
+
+.forminput:hover {
+	border: 2px solid #246bce;
+	outline: none;
+}
+
+.forminput:focus {
+	border: 3px solid #246bce;
+	outline: none;
+}
+
+
+input[type=submit] {
+	font-family: 'Comfortaa', cursive;
+	margin-top: 5px;
+	width: 100%;
+	color: white;
+	background-color: #0a0a0a;
+	border: 2px solid white;
+	border-radius: 10px;
+	transition: 0.5s;
+}
+
+input[type=submit]:hover {
+	border: 2px solid #246bce;
+}
+
+#contactbody {
+	padding: 10px;
+}

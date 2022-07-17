@@ -18,16 +18,27 @@
 		</ul>
 		<div id="video" class="window">
 			<div id="videoheader" class="windowheader">
-				Videos
+				<ul class="navbar">
+					<li class="navlink"><a><i class="fa-brands fa-youtube"></i> Videos</a></li>
+					<li class="rightlink"><a href="https://www.youtube.com/channel/UCHgDLjW9_30Y4d5RDbP5dIg" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a></li>
+				</ul>
 			</div>
 			<iframe width="960" height="540" frameborder="0" src="https://www.youtube.com/embed/videoseries?list=PUHgDLjW9_30Y4d5RDbP5dIg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 		</div>
 		<div id="contact" class="window">
 			<div id="contactheader" class="windowheader">
-				Contact
+				<ul class="navbar">
+					<li class="navlink"><a><i class="fa-regular fa-envelope"></i> Contact</a></li>
+				</ul>
 			</div>
-			<div id="contactbody" style="width:500;height:500;overflow:hidden;">
-				
+			<div id="contactbody" style="overflow:hidden;">
+				<form>
+					<label>Email: </label><br>
+					<input type="email" class="forminput"></input><br><br>
+					<label>Message: </label><br>
+					<textarea rows=4 class="forminput"></textarea><br><br>
+					<input type="submit"></input>
+				</form>
 			</div>
 		</div>
 	</body>
