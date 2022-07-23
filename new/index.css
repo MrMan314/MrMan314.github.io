@@ -130,3 +130,8 @@ footer {
 	text-align: right
 }
 
+.dock {
+	position: absolute;
+	bottom: 8;
+}
+

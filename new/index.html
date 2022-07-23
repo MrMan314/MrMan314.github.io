@@ -8,18 +8,19 @@
 		<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 		<script src="https://kit.fontawesome.com/7deb4e42b4.js" crossorigin="anonymous"></script>
 	</head>
-	<body onload="time();drag(document.getElementById('video'));drag(document.getElementById('contact'));">
+	<body onload="time();var windowList=document.getElementsByClassName('window'); for (var i = 0; i < windowList.length; i++) drag(windowList[i]);">
 		<ul class="navbar">
-			<li class="navlink"><a href="https://www.youtube.com/channel/UCHgDLjW9_30Y4d5RDbP5dIg"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
-			<li class="navlink"><a href="https://discord.com/invite/GzyXFNycVu"><i class="fa-brands fa-discord"></i> Discord</a></li>
-			<li class="navlink"><a href="https://github.com/MrMan314"><i class="fa-brands fa-github"></i> Github</a></li>
+			<li class="navlink"><a href="https://www.youtube.com/channel/UCHgDLjW9_30Y4d5RDbP5dIg" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+			<li class="navlink"><a href="https://discord.com/invite/GzyXFNycVu" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a></li>
+			<li class="navlink"><a href="https://github.com/MrMan314" target="_blank"><i class="fa-brands fa-github"></i> Github</a></li>
 			<li class="rightlink"><a id="clock"><i class="fa-regular fa-clock"></i> there is no time</a></li>
 			<li class="centerlink"><a>MrMan314</a></li>
 		</ul>
-		<div id="video" class="window">
-			<div id="videoheader" class="windowheader">
+		<div id="youtube" class="window">
+			<div id="youtubeheader" class="windowheader">
 				<ul class="navbar">
 					<li class="navlink"><a><i class="fa-brands fa-youtube"></i></a></li>
+					<li class="rightlink"><a href="#" onclick="hide('youtube')"><i class="fa-solid fa-xmark"></i></a></li>
 					<li class="rightlink"><a href="https://www.youtube.com/channel/UCHgDLjW9_30Y4d5RDbP5dIg" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a></li>
 					<li class="centerlink"><a>Videos</a></li>
 				</ul>
@@ -30,6 +31,7 @@
 			<div id="contactheader" class="windowheader">
 				<ul class="navbar">
 					<li class="navlink"><a><i class="fa-regular fa-envelope"></i></a></li>
+					<li class="rightlink"><a href="#" onclick="hide('contact')"><i class="fa-solid fa-xmark"></i></a></li>
 					<li class="centerlink"><a>Contact</a>
 				</ul>
 			</div>
@@ -43,9 +45,25 @@
 				</form>
 			</div>
 		</div>
+		<div id="discord" class="window">
+			<div id="discordheader" class="githubheader">
+				<ul class="navbar">
+					<li class="navlink"><a><i class="fa-brands fa-discord"></i></a></li>
+					<li class="rightlink"><a href="#" onclick="hide('discord')"><i class="fa-solid fa-xmark"></i></a></li>
+					<li class="rightlink"><a href="https://discord.com/invite/GzyXFNycVu" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a></li>
+					<li class="centerlink"><a>Discord</a></li>
+				</ul>
+			</div>
+			<iframe src="https://canary.discord.com/widget?id=781661443782475786&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+		<ul class="navbar dock">
+			<li class="navlink" id="discord-dock" style="display: none"><a href="#" onclick="show('discord')"><i class="fa-brands fa-discord"></i></a></li>
+			<li class="navlink" id="youtube-dock" style="display: none"><a href="#" onclick="show('youtube')"><i class="fa-brands fa-youtube"></i></a></li>
+			<li class="navlink" id="contact-dock" style="display: none"><a href="#" onclick="show('contact')"><i class="fa-regular fa-envelope"></i></a></li>
+		</ul>
 		<footer>
 			MrMan314's Site v2<br>
-			Build 8
+			Build 9
 		</footer>
 	</body>
 <html>

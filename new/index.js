@@ -43,3 +43,13 @@ function drag(e2) {
 	}
 }
 
+function show(name) {
+	document.getElementById(name).style.display="block";
+	document.getElementById(name+"-dock").style.display="none";
+}
+
+function hide(name) {
+	document.getElementById(name).style.display="none";
+	document.getElementById(name+"-dock").style.display="block";
+}
+
