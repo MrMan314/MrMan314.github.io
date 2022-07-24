@@ -46,7 +46,7 @@
 			</div>
 		</div>
 		<div id="discord" class="window">
-			<div id="discordheader" class="githubheader">
+			<div id="discordheader" class="windowheader">
 				<ul class="navbar">
 					<li class="navlink"><a><i class="fa-brands fa-discord"></i></a></li>
 					<li class="rightlink"><a href="#" onclick="hide('discord')"><i class="fa-solid fa-xmark"></i></a></li>
@@ -55,6 +55,20 @@
 				</ul>
 			</div>
 			<iframe src="https://canary.discord.com/widget?id=781661443782475786&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+		<div id="blog" class="window">
+			<div id="blogheader" class="windowheader">
+				<ul class="navbar">
+					<li class="navlink"><a><i class="fa-solid fa-blog"></i></a></li>
+					<li class="rightlink"><a href="#" onclick="hide('blog')"><i class="fa-solid fa-xmark"></i></a></li>
+					<li class="centerlink"><a>Blog</a></li>
+				</ul>
+			</div>
+			<div id="blogcontent" style="width:500;height:500;text-align:left;margin:10px"></div>
+			<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+			<script>
+				document.getElementById('blogcontent').innerHTML = marked.parse("# test\n**test**\n```py\nprint('amog')\n```")
+			</script>
 		</div>
 		<ul class="navbar dock">
 			<li class="navlink" id="discord-dock" style="display: none"><a href="#" onclick="show('discord')"><i class="fa-brands fa-discord"></i></a></li>
