@@ -7,13 +7,16 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 		<script src="https://kit.fontawesome.com/7deb4e42b4.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+		<link rel="stylesheet" href="dracula.css">
 	</head>
-	<body onload="time();var windowList=document.getElementsByClassName('window'); for (var i = 0; i < windowList.length; i++) drag(windowList[i]);">
+	<body onload="time();var windowList=document.getElementsByClassName('window'); for (var i = 0; i < windowList.length; i++) drag(windowList[i]);hljs.initHighlightingOnLoad();">
 		<ul class="navbar">
 			<li class="navlink"><a href="https://www.youtube.com/channel/UCHgDLjW9_30Y4d5RDbP5dIg" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
 			<li class="navlink"><a href="https://discord.com/invite/GzyXFNycVu" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a></li>
 			<li class="navlink"><a href="https://github.com/MrMan314" target="_blank"><i class="fa-brands fa-github"></i> Github</a></li>
-			<li class="rightlink"><a id="clock"><i class="fa-regular fa-clock"></i> there is no time</a></li>
+			<li class="rightlink"><a id="clock"><i class="fa-solid fa-clock"></i> there is no time</a></li>
 			<li class="centerlink"><a>MrMan314</a></li>
 		</ul>
 		<div id="youtube" class="window">
@@ -30,19 +33,23 @@
 		<div id="contact" class="window">
 			<div id="contactheader" class="windowheader">
 				<ul class="navbar">
-					<li class="navlink"><a><i class="fa-regular fa-envelope"></i></a></li>
+					<li class="navlink"><a><i class="fa-solid fa-envelope"></i></a></li>
 					<li class="rightlink"><a href="#" onclick="hide('contact')"><i class="fa-solid fa-xmark"></i></a></li>
 					<li class="centerlink"><a>Contact</a>
 				</ul>
 			</div>
 			<div id="contactbody" style="overflow:hidden;">
-				<form>
-					<label>Email: </label><br>
-					<input type="email" class="forminput"></input><br><br>
-					<label>Message: </label><br>
-					<textarea rows=4 class="forminput"></textarea><br><br>
-					<input type="submit"></input>
-				</form>
+				<label>Subject: </label><br>
+				<input type="text" class="forminput" id="contactsub"></input><br><br>
+				<label>Message: </label><br>
+				<textarea rows=4 class="forminput" id="contactmsg"></textarea><br><br>
+				<input type="submit" onclick="contactSubmit()"></input>
+				<script>
+					function contactSubmit() {
+						var sub = document.getElementById("contactsub").value, msg = document.getElementById("contactmsg").value;
+						window.open("mailto:mrman314dev@gmail.com?subject="+sub+"&body="+msg);
+					}
+				</script>
 			</div>
 		</div>
 		<div id="discord" class="window">
@@ -64,20 +71,48 @@
 					<li class="centerlink"><a>Blog</a></li>
 				</ul>
 			</div>
-			<div id="blogcontent" style="width:500;height:500;text-align:left;margin:10px"></div>
+			<div id="blogcontent" style="width:500;height:500;text-align:left;margin:10px;overflow:scroll;"></div>
 			<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 			<script>
-				document.getElementById('blogcontent').innerHTML = marked.parse("# test\n**test**\n```py\nprint('amog')\n```")
+				async function fetchBlog() {
+					let response = await fetch("/blogs/test.md");
+					let text = await response.text();
+					document.getElementById('blogcontent').innerHTML = marked.parse(text);
+//					hljs.highlightAll();
+				}
+				fetchBlog()
+			</script>
+		</div>
+		<div id="aboutme" class="window">
+			<div id="aboutmeheader" class="windowheader">
+				<ul class="navbar">
+					<li class="navlink"><a><i class="fa-solid fa-circle-info"></i></a></li>
+					<li class="rightlink"><a href="#" onclick="hide('aboutme')"><i class="fa-solid fa-xmark"></i></a></li>
+					<li class="centerlink"><a>About Me</a></li>
+				</ul>
+			</div>
+			<div id="aboutmecontent" style="width:500;height:500;text-align:left;margin:10px;overflow:scroll;"></div>
+			<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+			<script>
+				async function fetchAboutMe() {
+					let response = await fetch("/aboutme.md");
+					let text = await response.text();
+					document.getElementById('aboutmecontent').innerHTML = marked.parse(text);
+//					hljs.highlightAll();
+				}
+				fetchAboutMe();
 			</script>
 		</div>
 		<ul class="navbar dock">
 			<li class="navlink" id="discord-dock" style="display: none"><a href="#" onclick="show('discord')"><i class="fa-brands fa-discord"></i></a></li>
 			<li class="navlink" id="youtube-dock" style="display: none"><a href="#" onclick="show('youtube')"><i class="fa-brands fa-youtube"></i></a></li>
-			<li class="navlink" id="contact-dock" style="display: none"><a href="#" onclick="show('contact')"><i class="fa-regular fa-envelope"></i></a></li>
+			<li class="navlink" id="contact-dock" style="display: none"><a href="#" onclick="show('contact')"><i class="fa-solid fa-envelope"></i></a></li>
+			<li class="navlink" id="blog-dock" style="display: none"><a href="#" onclick="show('contact')"><i class="fa-solid fa-blog"></i></a></li>
+			<li class="navlink" id="aboutme-dock" style="display: none"><a href="#" onclick="show('aboutme')"><i class="fa-solid fa-circle-info"></i></i></a></li>
 		</ul>
 		<footer>
 			MrMan314's Site v2<br>
-			Build 9
+			Build 10
 		</footer>
 	</body>
 <html>
