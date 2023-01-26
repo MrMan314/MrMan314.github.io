@@ -42,6 +42,4 @@ I created Minecraft on Discord
 - (some) French
 
 # i use arch btw
-```py
-print("test")
-```
+
