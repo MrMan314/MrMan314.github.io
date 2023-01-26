@@ -1,0 +1,17 @@
+.masthead {
+    height: 100vh;
+    min-height: 500px;
+    background-image: url('bgdark.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.pfpicon {
+    height: 100%;
+    width: 45px;
+    /*padding-right: 100%;*/
+    /*width: 100%;*/
+    /*background-size: cover;*/
+    /*background-position: center;*/
+    /*background-image: url('pfp.png');*/
+}
