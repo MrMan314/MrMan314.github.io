@@ -43,7 +43,7 @@
 				<input type="text" class="forminput" id="contactsub"></input><br><br>
 				<label>Message: </label><br>
 				<textarea rows=4 class="forminput" id="contactmsg"></textarea><br><br>
-				<input type="submit" onclick="contactSubmit()"></input>
+				<button class="button" onclick="contactSubmit()"><i class="fa-solid fa-envelope"></i> Open Mail</button>
 				<script>
 					function contactSubmit() {
 						var sub = document.getElementById("contactsub").value, msg = document.getElementById("contactmsg").value;

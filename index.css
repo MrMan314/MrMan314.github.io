@@ -104,9 +104,9 @@ ul.navbar :is(.navlink, .rightlink, .centerlink) a:hover {
 }
 
 
-input[type=submit] {
+.button {
 	font-family: 'Comfortaa', cursive;
-	margin-top: 5px;
+	margin: 5px 0px 5px;
 	width: 100%;
 	color: white;
 	background-color: #0a0a0a;
@@ -115,7 +115,7 @@ input[type=submit] {
 	transition: 0.5s;
 }
 
-input[type=submit]:hover {
+.button:hover {
 	border: 2px solid #246bce;
 }
 
