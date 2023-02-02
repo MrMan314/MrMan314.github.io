@@ -57,6 +57,10 @@
 				document.getElementById(name+"-dock").style.display="block";
 			}
 
+			function disperseWindow(elem) {
+				elem.style.top = Math.floor(Math.random() * (window.innerHeight-elem.offsetHeight)) + "px";
+				elem.style.left = Math.floor(Math.random() * (window.innerWidth-elem.offsetWidth)) + "px"
+			}
 		</script>
 		<style>
 			body {
@@ -232,13 +236,13 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
 		<link rel="stylesheet" href="dracula.css">
 	</head>
-	<body onload="time();var windowList=document.getElementsByClassName('window'); for (var i = 0; i < windowList.length; i++) drag(windowList[i]);hljs.initHighlightingOnLoad();">
+	<body onload="time();var windowList=document.getElementsByClassName('window');for (var i = 0; i < windowList.length; i++) {drag(windowList[i]);disperseWindow(windowList[i])}hljs.initHighlightingOnLoad();">
 		<ul class="navbar">
 			<li class="navlink"><a href="https://www.youtube.com/channel/UCHgDLjW9_30Y4d5RDbP5dIg" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
 			<li class="navlink"><a href="https://discord.com/invite/GzyXFNycVu" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a></li>
 			<li class="navlink"><a href="https://github.com/MrMan314" target="_blank"><i class="fa-brands fa-github"></i> Github</a></li>
 			<li class="rightlink"><a id="clock"><i class="fa-solid fa-clock"></i> there is no time</a></li>
-			<li class="centerlink"><a>MrMan314</a></li>
+			<li class="centerlink"><a>MrMan</a></li>
 		</ul>
 		<div id="youtube" class="window">
 			<div id="youtubeheader" class="windowheader">
