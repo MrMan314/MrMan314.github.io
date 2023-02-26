@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>MrMan314's site</title>
-		<script>
+		<script defer>
 			function time() {
 				date = new Date();
 				h = date.getHours();
@@ -25,7 +25,6 @@
 					[].forEach.call(l, (t) => {min = parseInt(t.style.zIndex) < min ? parseInt(t.style.zIndex) : min});
 					e2.style.zIndex = parseInt(max) + 1;
 					[].forEach.call(l, (t) => {t.style.zIndex -= min});
-					console.log(e2.style.zIndex);
 					document.onmouseup = closeDragElement;
 					document.onmousemove = elementDrag;
 				}
@@ -50,6 +49,11 @@
 			function show(name) {
 				document.getElementById(name).style.display="block";
 				document.getElementById(name+"-dock").style.display="none";
+				var max = 0;
+				l = document.getElementsByClassName("window");
+				[].forEach.call(l, (t) => {max = parseInt(t.style.zIndex) > max ? parseInt(t.style.zIndex) : max});
+				console.log(max);
+				document.getElementById(name).style.zIndex=max + 1;
 			}
 
 			function hide(name) {
@@ -61,6 +65,75 @@
 				elem.style.top = Math.floor(Math.random() * (window.innerHeight-elem.offsetHeight)) + "px";
 				elem.style.left = Math.floor(Math.random() * (window.innerWidth-elem.offsetWidth)) + "px"
 			}
+
+			async function addWindowFromMD(id, icon, title, width, height) {
+				document.getElementById('windows').innerHTML += '<div id="'+id+'" class="window">\n<div id="'+id+'header" class="windowheader">\n<ul class="navbar">\n<li class="navlink"><a><i class="'+icon+'"></i></a></li>\n<li class="rightlink"><a href="#" onclick="hide(\''+id+'\')"><i class="fa-solid fa-xmark"></i></a></li>\n<li class="centerlink"><a>'+title+'</a></li>\n</ul>\n</div>\n<div id="'+id+'content" style="width:'+width+';height:'+height+';text-align:left;margin:10px;overflow:scroll;"></div></div>';
+				document.getElementById('dock').innerHTML += '<li class="navlink" id="'+id+'-dock" style="display: none"><a href="#" onclick="show(\''+id+'\')"><i class="'+icon+'"></i></i></a></li>'
+				let response = await fetch("/windows/"+id+".md");
+				let text = await response.text();
+				document.getElementById(id+'content').innerHTML = marked.parse(text);
+				drag(document.getElementById(id));
+			}
+			
+			var MDList = [
+				['aboutme', 'fa-solid fa-circle-info', 'About Me', '500', '500'],
+				['skills', 'fa-solid fa-screwdriver-wrench', 'Skills', '500', '300'],
+				['achievements', 'fa-regular fa-star', 'Achievements', '550', '350'],
+				['activities', 'fa-solid fa-chart-line', 'Activities', '550', '350'],
+			];
+
+			var hidden = ['youtube', 'contact', 'discord']
+
+			function init() {
+				time();
+				for (var i in MDList) {
+					addWindowFromMD(MDList[i][0], MDList[i][1], MDList[i][2], MDList[i][3], MDList[i][4]);
+				}
+				var windowList=document.getElementsByClassName('window');
+				for (var i = 0; i < windowList.length; i++) {
+					drag(windowList[i]);
+					disperseWindow(windowList[i]);
+				}
+				for (var i in hidden) {
+					hide(hidden[i]);
+				}
+				hljs.initHighlightingOnLoad();
+				if(localStorage.getItem("blech") == "true") {
+					blech();
+					setTimeout(()=>{
+						document.getElementById("loadingscreen").remove();
+
+					}, 500);
+				} else document.getElementById("loadingscreen").remove();
+			}
+
+			function blech() {
+				document.getElementById("body").classList.toggle("blech");
+				document.getElementById("blechindicator").classList.toggle("fa-moon");
+				document.getElementById("blechindicator").classList.toggle("fa-sun");
+				var windowList=document.getElementsByClassName('window');
+				for (var i = 0; i < windowList.length; i++) {
+					windowList[i].classList.toggle("blech");
+				}
+				windowList=document.getElementsByClassName('windowheader');
+				for (var i = 0; i < windowList.length; i++) {
+					windowList[i].classList.toggle("blech");
+				}
+				windowList=document.getElementsByClassName('navbar');
+				for (var i = 0; i < windowList.length; i++) {
+					windowList[i].classList.toggle("blech");
+				}
+				var windowList=document.getElementsByClassName('forminput');
+				for (var i = 0; i < windowList.length; i++) {
+					windowList[i].classList.toggle("blech");
+				}
+				var windowList=document.getElementsByClassName('button');
+				for (var i = 0; i < windowList.length; i++) {
+					windowList[i].classList.toggle("blech");
+				}
+				if(document.getElementById("body").classList.contains("blech")) localStorage.setItem("blech", "true");
+				else localStorage.setItem("blech", "false");
+			}
 		</script>
 		<style>
 			body {
@@ -71,6 +144,13 @@
 				color: #FFFFFF;
 				font-family: 'Comfortaa', cursive;
 				overflow: hidden;
+				transition: background-image 1s;
+			}
+
+			body.blech {
+				background-color: #FFFFFF;
+				background-image: url("bglite.png");
+				color: #000000;
 			}
 
 			ul.navbar {
@@ -79,10 +159,23 @@
 				padding: 0;
 				overflow: hidden;
 				background-color: #050505;
-				opacity: 0.75;
+				opacity: 0.97;
 				border-radius: 25px;
+				transition: 1s;
 			}
-
+			
+			ul.navbar.blech {
+				background-color: #ffffff;
+			}
+/*
+			ul.topnav {
+				border: 1px solid white;
+			}
+			
+			ul.topnav.blech {
+				border: 1px solid black;
+			}
+*/
 			li.navlink {
 				float: left;
 			}
@@ -110,14 +203,37 @@
 				background-color: #1a1a1a;
 			}
 
+			ul.blech :is(.navlink, .rightlink, .centerlink) a {
+				border-radius: 25px;
+				display: block;
+				color: #000000;
+				text-align: center;
+				padding: 14px 16px;
+				text-decoration: none;
+				transition: 1s;
+			}
+
+			ul.blech :is(.navlink, .rightlink, .centerlink) a:hover {
+				background-color: #DFDFDF;
+			}
+
 			.window {
 				position: absolute;
 				z-index: 9;
-				background-color: 050505;
+				background-color: #050505;
+				color: #FFFFFF;
 				text-align: center;
 				border-radius: 25px;
 				border-collapse: separate;
 				overflow: hidden;
+/*				border: 1px solid white;*/
+				opacity: 0.97;
+				transition: background-color 1s, color 1s;
+			}
+
+			.window.blech {
+				background-color: #FFFFFF;
+				color: #000000;
 			}
 
 			.windowheader {
@@ -129,12 +245,19 @@
 				-moz-user-select: none;
 				-ms-user-select: none;
 				user-select: none;
+				transition: 1s;
+			}
+
+			.windowheader.blech {
+				background-color: #FFFFFF;
+				color: #000000;
 			}
 
 			.windowicon {
 				float: left;
 				height: 100%;
 			}
+
 			.windowbuttons {
 				float: right;
 				height: 100%;
@@ -151,8 +274,14 @@
 				padding-top: 5px;
 				resize: none;
 				font-family: 'Comfortaa', cursive;
-				transition: 0.5s;
+				transition: 1s;
 				outline: none;
+			}
+
+			.forminput.blech {
+				background-color: #FFFFFF;
+				color: #000000;
+				border: 2px solid black;
 			}
 
 			*:hover *:focus {
@@ -178,7 +307,13 @@
 				background-color: #0a0a0a;
 				border: 2px solid white;
 				border-radius: 10px;
-				transition: 0.5s;
+				transition: 1s;
+			}
+			
+			.button.blech {
+				background-color: #FFFFFF;
+				color: #000000;
+				border: 2px solid black;
 			}
 
 			.button:hover {
@@ -199,6 +334,14 @@
 			.dock {
 				position: absolute;
 				bottom: 8;
+				/*border: 1px solid white;*/
+			}
+			
+			.rightdock {
+				position: absolute;
+				bottom: 8;
+				right: 8;
+				/*border: 1px solid white;*/
 			}
 
 			img {
@@ -227,6 +370,45 @@
 			::-webkit-scrollbar-thumb:hover {
 				background: #3f3f3f; 
 			}
+
+			#loadingscreen {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+				background: #1f1f1f;
+				z-index: 2147483647;
+				text-align: center;
+			}
+
+			#loadinganim {
+				border: 4px solid #5f5f5f;
+				border-radius: 50%;
+				width: 128px;
+				height: 128px;
+  				margin: auto;
+				position:fixed;
+				top:0;
+				bottom:0;
+				left:0;
+				right:0;
+				animation: load 1s linear infinite;
+			}
+
+			@keyframes load {
+				0% {
+					width: 0px;
+					height: 0px;
+				}
+				100% {
+					width: 256px;
+					height: 256px;
+					border: 0px solid #1f1f1f;
+				}
+			}
 		</style>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -235,110 +417,75 @@
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
 		<link rel="stylesheet" href="dracula.css">
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<script>
+		</script>
 	</head>
-	<body onload="time();var windowList=document.getElementsByClassName('window');for (var i = 0; i < windowList.length; i++) {drag(windowList[i]);disperseWindow(windowList[i])}hljs.initHighlightingOnLoad();">
-		<ul class="navbar">
+	<body onload="init();" id="body">
+		<ul id="navbar" class="navbar topnav">
 			<li class="navlink"><a href="https://www.youtube.com/channel/UCHgDLjW9_30Y4d5RDbP5dIg" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
 			<li class="navlink"><a href="https://discord.com/invite/GzyXFNycVu" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a></li>
 			<li class="navlink"><a href="https://github.com/MrMan314" target="_blank"><i class="fa-brands fa-github"></i> Github</a></li>
 			<li class="rightlink"><a id="clock"><i class="fa-solid fa-clock"></i> there is no time</a></li>
 			<li class="centerlink"><a>MrMan</a></li>
 		</ul>
-		<div id="youtube" class="window">
-			<div id="youtubeheader" class="windowheader">
-				<ul class="navbar">
-					<li class="navlink"><a><i class="fa-brands fa-youtube"></i></a></li>
-					<li class="rightlink"><a href="#" onclick="hide('youtube')"><i class="fa-solid fa-xmark"></i></a></li>
-					<li class="rightlink"><a href="https://www.youtube.com/channel/UCHgDLjW9_30Y4d5RDbP5dIg" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a></li>
-					<li class="centerlink"><a>Videos</a></li>
-				</ul>
+		<div id="windows">
+			<div id="youtube" class="window" style="display: block;">
+				<div id="youtubeheader" class="windowheader">
+					<ul class="navbar">
+						<li class="navlink"><a><i class="fa-brands fa-youtube"></i></a></li>
+						<li class="rightlink"><a href="#" onclick="hide('youtube')"><i class="fa-solid fa-xmark"></i></a></li>
+						<li class="rightlink"><a href="https://www.youtube.com/channel/UCHgDLjW9_30Y4d5RDbP5dIg" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a></li>
+						<li class="centerlink"><a>Videos</a></li>
+					</ul>
+				</div>
+				<iframe width="960" height="540" frameborder="0" src="https://www.youtube.com/embed/videoseries?list=PUHgDLjW9_30Y4d5RDbP5dIg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 			</div>
-			<iframe width="960" height="540" frameborder="0" src="https://www.youtube.com/embed/videoseries?list=PUHgDLjW9_30Y4d5RDbP5dIg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+			<div id="contact" class="window">
+				<div id="contactheader" class="windowheader">
+					<ul class="navbar">
+						<li class="navlink"><a><i class="fa-solid fa-envelope"></i></a></li>
+						<li class="rightlink"><a href="#" onclick="hide('contact')"><i class="fa-solid fa-xmark"></i></a></li>
+						<li class="centerlink"><a>Contact</a>
+					</ul>
+				</div>
+				<div id="contactbody" style="overflow:hidden;">
+					<label>Subject: </label><br>
+					<input type="text" class="forminput" id="contactsub"></input><br><br>
+					<label>Message: </label><br>
+					<textarea rows=4 class="forminput" id="contactmsg"></textarea><br><br>
+					<button class="button" onclick="contactSubmit()"><i class="fa-solid fa-envelope"></i> Open Mail</button>
+					<script>
+						function contactSubmit() {
+							var sub = document.getElementById("contactsub").value, msg = document.getElementById("contactmsg").value;
+							window.open("mailto:iwillreply@mrman314.tech?subject="+sub+"&body="+msg);
+						}
+					</script>
+				</div>
+			</div>
+			<div id="discord" class="window" style="display: block">
+				<div id="discordheader" class="windowheader">
+					<ul class="navbar">
+						<li class="navlink"><a><i class="fa-brands fa-discord"></i></a></li>
+						<li class="rightlink"><a href="#" onclick="hide('discord')"><i class="fa-solid fa-xmark"></i></a></li>
+						<li class="rightlink"><a href="https://discord.com/invite/GzyXFNycVu" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a></li>
+						<li class="centerlink"><a>Discord</a></li>
+					</ul>
+				</div>
+				<iframe src="https://canary.discord.com/widget?id=781661443782475786&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+			</div>
 		</div>
-		<div id="contact" class="window">
-			<div id="contactheader" class="windowheader">
-				<ul class="navbar">
-					<li class="navlink"><a><i class="fa-solid fa-envelope"></i></a></li>
-					<li class="rightlink"><a href="#" onclick="hide('contact')"><i class="fa-solid fa-xmark"></i></a></li>
-					<li class="centerlink"><a>Contact</a>
-				</ul>
-			</div>
-			<div id="contactbody" style="overflow:hidden;">
-				<label>Subject: </label><br>
-				<input type="text" class="forminput" id="contactsub"></input><br><br>
-				<label>Message: </label><br>
-				<textarea rows=4 class="forminput" id="contactmsg"></textarea><br><br>
-				<button class="button" onclick="contactSubmit()"><i class="fa-solid fa-envelope"></i> Open Mail</button>
-				<script>
-					function contactSubmit() {
-						var sub = document.getElementById("contactsub").value, msg = document.getElementById("contactmsg").value;
-						window.open("mailto:iwillreply@mrman314.tech?subject="+sub+"&body="+msg);
-					}
-				</script>
-			</div>
-		</div>
-		<div id="discord" class="window">
-			<div id="discordheader" class="windowheader">
-				<ul class="navbar">
-					<li class="navlink"><a><i class="fa-brands fa-discord"></i></a></li>
-					<li class="rightlink"><a href="#" onclick="hide('discord')"><i class="fa-solid fa-xmark"></i></a></li>
-					<li class="rightlink"><a href="https://discord.com/invite/GzyXFNycVu" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a></li>
-					<li class="centerlink"><a>Discord</a></li>
-				</ul>
-			</div>
-			<iframe src="https://canary.discord.com/widget?id=781661443782475786&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-		</div>
-		<div id="blog" class="window">
-			<div id="blogheader" class="windowheader">
-				<ul class="navbar">
-					<li class="navlink"><a><i class="fa-solid fa-blog"></i></a></li>
-					<li class="rightlink"><a href="#" onclick="hide('blog')"><i class="fa-solid fa-xmark"></i></a></li>
-					<li class="centerlink"><a>Blog</a></li>
-				</ul>
-			</div>
-			<div id="blogcontent" style="width:500;height:500;text-align:left;margin:10px;overflow:scroll;"></div>
-			<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-			<script>
-				async function fetchBlog() {
-					let response = await fetch("/blogs/test.md");
-					let text = await response.text();
-					document.getElementById('blogcontent').innerHTML = marked.parse(text);
-//					hljs.highlightAll();
-				}
-				fetchBlog()
-			</script>
-		</div>
-		<div id="aboutme" class="window">
-			<div id="aboutmeheader" class="windowheader">
-				<ul class="navbar">
-					<li class="navlink"><a><i class="fa-solid fa-circle-info"></i></a></li>
-					<li class="rightlink"><a href="#" onclick="hide('aboutme')"><i class="fa-solid fa-xmark"></i></a></li>
-					<li class="centerlink"><a>About Me</a></li>
-				</ul>
-			</div>
-			<div id="aboutmecontent" style="width:500;height:500;text-align:left;margin:10px;overflow:scroll;"></div>
-			<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-			<script>
-				async function fetchAboutMe() {
-					let response = await fetch("/aboutme.md");
-					let text = await response.text();
-					document.getElementById('aboutmecontent').innerHTML = marked.parse(text);
-//					hljs.highlightAll();
-				}
-				fetchAboutMe();
-			</script>
-		</div>
-		<ul class="navbar dock">
+		<ul id="dock" class="navbar dock">
 			<li class="navlink" id="discord-dock" style="display: none"><a href="#" onclick="show('discord')"><i class="fa-brands fa-discord"></i></a></li>
 			<li class="navlink" id="youtube-dock" style="display: none"><a href="#" onclick="show('youtube')"><i class="fa-brands fa-youtube"></i></a></li>
 			<li class="navlink" id="contact-dock" style="display: none"><a href="#" onclick="show('contact')"><i class="fa-solid fa-envelope"></i></a></li>
-			<li class="navlink" id="blog-dock" style="display: none"><a href="#" onclick="show('blog')"><i class="fa-solid fa-blog"></i></a></li>
-			<li class="navlink" id="aboutme-dock" style="display: none"><a href="#" onclick="show('aboutme')"><i class="fa-solid fa-circle-info"></i></i></a></li>
 		</ul>
-		<footer>
-			MrMan314's Site v2<br>
-			Build 10
-		</footer>
+		<ul id="modeswitcher" class="navbar rightdock">
+			<li class="rightlink"><a id="blechswitch" onclick="blech();"><i id="blechindicator" class="fa-solid fa-moon"></i></a></li>
+		</ul>
+		<div id="loadingscreen">
+			<div id="loadinganim"></div>
+		</div>
 	</body>
 <html>
 
