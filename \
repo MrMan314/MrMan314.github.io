@@ -76,7 +76,6 @@
 			async function addWindowFromMD(id, icon, title, width, height) {
 				document.getElementById('windows').innerHTML += '<div id="'+id+'" class="window">\n<div id="'+id+'header" class="windowheader">\n<ul class="navbar">\n<li class="navlink"><a><i class="'+icon+'"></i></a></li>\n<li class="rightlink"><a href="#" onclick="hide(\''+id+'\')"><i class="fa-solid fa-xmark"></i></a></li>\n<li class="centerlink"><a>'+title+'</a></li>\n</ul>\n</div>\n<div id="'+id+'content" style="width:'+width+';height:'+height+';text-align:left;margin:10px;overflow:scroll;"></div></div>';
 				document.getElementById('dock').innerHTML += '<li class="navlink" id="'+id+'-dock" style="display: none"><a href="#" onclick="show(\''+id+'\')"><i class="'+icon+'"></i></i></a></li>'
-				document.getElementById('icons').innerHTML += '<li class="dticon" onclick="show(\''+id+'\');center(\''+id+'\')"><div class="dtaccicon"><i class="'+icon+' fa-3x dticonicon"></i></div><p>'+title+'</p></li>';
 				let response = await fetch("/windows/"+id+".md");
 				let text = await response.text();
 				document.getElementById(id+'content').innerHTML = marked.parse(text);
@@ -121,7 +120,6 @@
 				document.getElementById("body").classList.toggle("blech");
 				document.getElementById("blechindicator").classList.toggle("fa-moon");
 				document.getElementById("blechindicator").classList.toggle("fa-sun");
-				document.getElementById("icons").classList.toggle("blech");
 				var windowList=document.getElementsByClassName('window');
 				for (var i = 0; i < windowList.length; i++) {
 					windowList[i].classList.toggle("blech");
@@ -432,67 +430,14 @@
 
 			#icons {
 				margin-top: 8px;
-				padding-left: 0px;
 				width: 100%;
 				height: 100%;
 				list-style-type: none;
 			}
-		
-			.dticon {
-				padding: 8px;
-				margin: 4px;
-				width: 64px;
-				border-radius: 8px;
-				opacity: 0.97;
-				transition: 1s;
-			}
-
-			.dticon:hover {
-				background: #0a0a0a;
-			}
-
-			.dtaccicon {
-				width: 64px;
-				height: 64px;
-			}
-
-			/*im literally gonna*/
-			.fa-flask.dticonicon {
-				margin-left: 12px !important;
-			}
 			
-			.fa-star.dticonicon {
-				margin-left: 6px !important;
-			}
-			
-			.dtaccicon i {
-				margin: 8px 8px 8px 8px;
-				color: #FFFFFF;
-				transition: 1s;
-			}
-
-			.dticon p {
-				font-size: 12px;
-				margin: 0px;
-				color: #FFFFFF;
-				width: 64px;
-				text-align: center;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-				transition: 1s;
-			}
-
-			.blech .dticon:hover {
-				background: #FFFFFF;
-			}
-
-			.blech p {
-				color: #000000;
-			}
-
-			.blech i {
-				color: #000000;
+			.dticon a {
+				color: white;
+				font-size: 10em;
 			}
 		</style>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -515,6 +460,7 @@
 			<li class="centerlink"><a>MrMan</a></li>
 		</ul>
 		<ul id="icons">
+			<li class="dticon"><a><i class="fa-solid fa-envelope" onclick="show('contact')"></i></a></li>
 		</ul>
 		<div id="windows">
 			<div id="youtube" class="window" style="display: block;">
