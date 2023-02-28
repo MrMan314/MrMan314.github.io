@@ -1,5 +1,4 @@
 ## About Me
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From a young age, I have been interested in coding and anything computer related.  
 
 <img src="https://media.tenor.com/jXQiJUuqfM8AAAAd/type-emoji.gif" width="490"></img>
@@ -25,3 +24,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I have advanced soldering skills, which enable me to modify electronics, attach different devices, make devices work, and test new configurations.
 
 <img src="https://cdn-learn.adafruit.com/guides/cropped_images/000/000/619/medium640/solder-still.jpg?1534972150" width="490"></img>
+
+<img src="https://visitor-badge.glitch.me/badge?page_id=mrman314.tech" style="display:none;"></img>
+
