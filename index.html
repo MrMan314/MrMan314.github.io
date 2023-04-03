@@ -175,24 +175,30 @@
 				margin: 0;
 				padding: 0;
 				overflow: hidden;
-				background-color: #050505;
+/*				background-color: #050505;*/
+				background: rgba(5, 5, 5, 0);
+
+/*				backdrop-filter: blur(5px);*/
 				opacity: 0.97;
 				border-radius: 25px;
 				transition: 1s;
 			}
 			
 			ul.navbar.blech {
-				background-color: #ffffff;
+/*				background-color: #ffffff;*/
+				background: rgba(255, 255, 255, 0);
+/*				backdrop-filter: blur(5px);*/
 			}
-/*
+			
 			ul.topnav {
-				border: 1px solid white;
+				background: rgba(5, 5, 5, 0.75);
+				backdrop-filter: blur(5px);
 			}
 			
 			ul.topnav.blech {
-				border: 1px solid black;
+				background: rgba(255, 255, 255, 0.75);
 			}
-*/
+			
 			li.navlink {
 				float: left;
 			}
@@ -218,10 +224,11 @@
 				padding: 14px 16px;
 				text-decoration: none;
 				transition: 1s;
+				background: rgba(0, 0, 0, 0);
 			}
 
 			ul.navbar :is(.navlink, .rightlink, .centerlink) a:hover {
-				background-color: #1a1a1a;
+				background: rgba(26, 26, 26, 0.75);
 			}
 
 			ul.blech :is(.navlink, .rightlink, .centerlink) a {
@@ -241,26 +248,32 @@
 			.window {
 				position: absolute;
 				z-index: 9;
-				background-color: #050505;
+/*				background-color: #050505;*/
+				background: rgba(5, 5, 5, 0.75);
+				backdrop-filter: blur(5px);
 				color: #FFFFFF;
 				text-align: center;
 				border-radius: 25px;
 				border-collapse: separate;
 				overflow: hidden;
 /*				border: 1px solid white;*/
-				opacity: 0.97;
+/*				opacity: 0.97;*/
 				transition: background-color 1s, color 1s;
 			}
 
 			.window.blech {
-				background-color: #FFFFFF;
+/*				background-color: #FFFFFF;*/
+				background: rgba(255, 255, 255, 0.75);
+				backdrop-filter: blur(5px);
 				color: #000000;
 			}
 
-			.windowheader {
+/*			.windowheader {
 				cursor: move;
 				z-index: 10;
 				background-color: #050505;
+				background: rgba(5, 5, 5, 0);
+				backdrop-filter: blur(5px);
 				color: #FFFFFF;
 				-webkit-user-select: none;
 				-moz-user-select: none;
@@ -273,7 +286,7 @@
 				background-color: #FFFFFF;
 				color: #000000;
 			}
-
+*/
 			.windowicon {
 				float: left;
 				height: 100%;
@@ -290,7 +303,7 @@
 				margin-top: 5px;
 				padding: 2px;
 				border-radius: 10px;
-				background-color: #050505;
+				background: rgba(5, 5, 5, 0);
 				color: #FFFFFF;
 				padding-top: 5px;
 				resize: none;
@@ -300,7 +313,7 @@
 			}
 
 			.forminput.blech {
-				background-color: #FFFFFF;
+				background: rgba(255, 255, 255, 0);
 				color: #000000;
 				border: 2px solid black;
 			}
@@ -570,12 +583,12 @@
 				</div>
 			</div>
 		</div>
-		<ul id="dock" class="navbar dock">
+		<ul id="dock" class="navbar dock topnav">
 			<li class="navlink" id="discord-dock" style="display: none"><a href="#" onclick="show('discord')"><i class="fa-brands fa-discord"></i></a></li>
 			<li class="navlink" id="youtube-dock" style="display: none"><a href="#" onclick="show('youtube')"><i class="fa-brands fa-youtube"></i></a></li>
 			<li class="navlink" id="contact-dock" style="display: none"><a href="#" onclick="show('contact')"><i class="fa-solid fa-envelope"></i></a></li>
 		</ul>
-		<ul id="modeswitcher" class="navbar rightdock">
+		<ul id="modeswitcher" class="navbar rightdock topnav">
 			<li class="rightlink"><a id="blechswitch" onclick="blech();"><i id="blechindicator" class="fa-solid fa-moon"></i></a></li>
 		</ul>
 		<div id="loadingscreen">
