@@ -1,0 +1,227 @@
+.icon {
+	display: inline-block;
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 1.5em;
+	height: 1.5em;
+	vertical-align: middle;
+}
+
+.icon-small {
+	width: 1em;
+	height: 1em;
+}
+
+.icon-large {
+	width: 3em;
+	height: 3em;
+}
+
+.icon-label {
+	width: 4.5em;
+	size: 12pt;
+	padding-top: 4.5em;
+	margin-bottom: .5em;
+	height: 1em;
+}
+
+.icon-mail {
+	background-image: url('/icons/mail.svg');
+}
+
+.icon-link {
+	cursor: pointer;
+	background-image: url('/icons/link.svg');
+}
+ 
+.icon-info {
+	background-image: url('/icons/info.svg');
+}
+
+.icon-home {
+	background-image: url('/icons/home.svg');
+}
+
+.icon-tools {
+	background-image: url('/icons/tools.svg');
+}
+
+.icon-star {
+	background-image: url('/icons/star.svg');
+}
+
+.icon-check {
+	background-image: url('/icons/check.svg');
+}
+
+.icon-video {
+	background-image: url('/icons/video.svg');
+}
+
+.icon-docker {
+	background-image: url('/icons/docker.svg');
+}
+
+.icon-chat {
+	background-image: url('/icons/chat.svg');
+}
+
+.icon-matlab {
+	background-image: url('/icons/matlab.png');
+}
+
+.icon-aws {
+	background-image: url('/icons/aws-dark.svg');
+}
+
+.blech .icon-aws {
+	background-image: url('/icons/aws.svg');
+}
+
+.icon-ring {
+	background-image: url('/icons/ring.svg');
+}
+
+.icon-terminal {
+	background-image: url('/icons/terminal.svg');
+}
+
+.icon-linux {
+	background-image: url('/icons/linux.svg');
+}
+
+.icon-esp {
+	background-image: url('/icons/esp.svg');
+}
+
+.icon-close {
+	cursor: pointer;
+	background-image: url('/icons/close.svg');
+}
+
+.icon-close:hover {
+	background-image: url('/icons/close-hover.svg');
+}
+
+.icon-close:active {
+	background-image: url('/icons/close-active.svg');
+}
+
+.icon-github {
+	background-color: currentColor;
+	-webkit-mask: url('/icons/github.svg') no-repeat center / contain;
+	mask: url('/icons/github.svg') no-repeat center / contain;
+}
+
+.icon-flask {
+	position: relative;
+}
+
+.icon-flask::after {
+	content: "";
+	position: relative;
+	display: flex;
+	height: 4.5em;
+	width: 4.5em;
+	left: 0;
+	top: -5.5em;
+	background-color: currentColor;
+	-webkit-mask: url('/icons/flask.svg') no-repeat center / contain;
+	mask: url('/icons/flask.svg') no-repeat center / contain;
+}
+
+.icon-linkedin {
+	background-image: url('/icons/linkedin.svg');
+}
+
+.icon-sun {
+	background-image: url('/icons/sun.svg');
+}
+
+.icon-moon {
+	background-image: url('/icons/moon.svg');
+}
+
+.icon-rss {
+	background-image: url('/icons/rss.svg');
+}
+
+.icon-vim {
+	background-image: url('/icons/vim.svg');
+}
+
+.icon-git {
+	background-image: url('/icons/git.svg');
+}
+
+.icon-gdb {
+	background-image: url('/icons/gdb.svg');
+}
+
+.icon-apache {
+	background-image: url('/icons/apache.svg');
+}
+
+.icon-ghidra {
+	background-image: url('/icons/ghidra.svg');
+}
+
+.icon-qemu {
+	background-image: url('/icons/qemu.svg');
+}
+
+.icon-cloudflare {
+	background-image: url('/icons/cloudflare.svg');
+}
+
+.icon-ffmpeg {
+	background-image: url('/icons/ffmpeg.svg');
+}
+
+.icon-gallery {
+	background-image: url('/icons/gallery.svg');
+}
+
+.icon-file-asm {
+	background-image: url('/icons/files/asm.svg');
+}
+
+.icon-file-c {
+	background-image: url('/icons/files/c.svg');
+}
+
+.icon-file-cmake {
+	background-image: url('/icons/files/cmake.svg');
+}
+
+.icon-file-cpp {
+	background-image: url('/icons/files/cpp.svg');
+}
+
+.icon-file-css {
+	background-image: url('/icons/files/css.svg');
+}
+
+.icon-file-html {
+	background-image: url('/icons/files/html.svg');
+}
+
+.icon-file-java {
+	background-image: url('/icons/files/java.svg');
+}
+
+.icon-file-js {
+	background-image: url('/icons/files/js.svg');
+}
+
+.icon-file-makefile {
+	background-image: url('/icons/files/makefile.svg');
+}
+
+.icon-file-py {
+	background-image: url('/icons/files/py.svg');
+}
+
+.icon-file-sh {
+	background-image: url('/icons/files/sh.svg');
+}
