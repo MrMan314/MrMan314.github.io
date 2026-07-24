@@ -107,6 +107,32 @@
 	background-image: url('/icons/close-active.svg');
 }
 
+.icon-maximize {
+	cursor: pointer;
+	background-image: url('/icons/maximize.svg');
+}
+
+.icon-maximize:hover {
+	background-image: url('/icons/maximize-hover.svg');
+}
+
+.icon-maximize:active {
+	background-image: url('/icons/maximize-active.svg');
+}
+
+.icon-restore {
+	cursor: pointer;
+	background-image: url('/icons/restore.svg');
+}
+
+.icon-restore:hover {
+	background-image: url('/icons/restore-hover.svg');
+}
+
+.icon-restore:active {
+	background-image: url('/icons/restore-active.svg');
+}
+
 .icon-github {
 	background-color: currentColor;
 	-webkit-mask: url('/icons/github.svg') no-repeat center / contain;

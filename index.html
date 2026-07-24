@@ -7,10 +7,6 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
-		<!--<script src="https://kit.fontawesome.com/7deb4e42b4.js" crossorigin="anonymous"></script>-->
-		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
-		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
-		<link rel="stylesheet" href="dracula.css">
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFQHWYYNXM"></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
@@ -20,68 +16,19 @@
 		</script>
 		<base target="_blank">
 	</head>
-	<body onload="init();" id="body">
+	<body onload="init()">
+		<div id="windows">
+		</div>
 		<ul id="navbar" class="navbar topnav">
 			<li class="navlink"><a href="https://github.com/MrMan314" target="_blank"><i class="icon icon-github icon-small"></i>&nbsp;Github</a></li>
 			<li class="navlink"><a href="https://www.linkedin.com/in/felix-zhang-mrman" target="_blank"><i class="icon icon-linkedin icon-small"></i>&nbsp;Linkedin</a></li>
 			<li class="rightlink"><a id="clock">there is no time</a></li>
 			<li class="centerlink"><a>Felix Zhang</a></li>
 		</ul>
-		<ul id="icons">
-		</ul>
-		<div id="windows">
-			<div id="youtube" class="window" style="z-index: 0; display: block;">
-				<div id="youtubeheader" class="windowheader">
-					<ul class="navbar">
-						<li class="navlink"><a><i class="icon icon-video"></i></a></li>
-						<li class="rightlink"><a><i class="icon icon-close" onclick="hide('youtube')"></i></a></li>
-						<li class="rightlink"><a><i class="icon icon-link" onclick="window.open('https://www.youtube.com/channel/UCHgDLjW9_30Y4d5RDbP5dI')"g></i></a></li>
-						<li class="centerlink"><a>Videos</a></li>
-					</ul>
-				</div>
-				<iframe width="960" height="540" frameborder="0" src="https://www.youtube.com/embed/videoseries?list=PUHgDLjW9_30Y4d5RDbP5dIg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-			</div>
-			<div id="contact" class="window" style="z-index: 1; display: block;">
-				<div id="contactheader" class="windowheader">
-					<ul class="navbar">
-						<li class="navlink"><a><i class="icon icon-mail"></i></a></li>
-						<li class="rightlink"><a><i class="icon icon-close" onclick="hide('contact')"></i></a></li>
-						<li class="centerlink"><a>Contact</a></li>
-					</ul>
-				</div>
-				<div id="contactbody" style="overflow:hidden;width:200px">
-<!--					<label>Subject: </label><br>
-					<input type="text" class="forminput" id="contactsub"></input><br><br>
-					<label>Message: </label><br>
-					<textarea rows=4 class="forminput" id="contactmsg"></textarea><br><br>-->
-					<button class="button" onclick="contactSubmit()"><i class="icon icon-mail icon-small"></i> Open Mail</button>
-					<script>
-						function contactSubmit() {
-//							var sub = document.getElementById("contactsub").value, msg = document.getElementById("contactmsg").value;
-							window.open("mailto:iwillreply@mrman314.tech");//?subject="+sub+"&body="+msg);
-						}
-					</script>
-				</div>
-			</div>
-			<div id="discord" class="window" style="z-index: 2; display: block">
-				<div id="discordheader" class="windowheader">
-					<ul class="navbar">
-						<li class="navlink"><a><i class="icon icon-chat"></i></a></li>
-						<li class="rightlink"><a><i class="icon icon-close" onclick="hide('discord')"></i></a></li>
-						<li class="rightlink"><a><i class="icon icon-link" onclick="window.open('https://discord.com/invite/GzyXFNycVu')"></i></a></li>
-						<li class="centerlink"><a>Discord</a></li>
-					</ul>
-				</div>
-				<div id="discordbody">
-					<iframe src="https://canary.discord.com/widget?id=781661443782475786&theme=dark" id="discordcont" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-				</div>
-			</div>
-		</div>
 		<ul id="dock" class="navbar dock topnav">
-			<li class="navlink" id="discord-dock" style="display: none"><a onclick="show('discord')"><i class="icon icon-chat"></i></a></li>
-			<li class="navlink" id="youtube-dock" style="display: none"><a onclick="show('youtube')"><i class="icon icon-video"></i></a></li>
-			<li class="navlink" id="contact-dock" style="display: none"><a onclick="show('contact')"><i class="icon icon-mail"></i></a></li>
 			<li class="rightlink"><a id="blechswitch" onclick="blech();"><i id="blechindicator" class="icon icon-moon"></i></a></li>
+		</ul>
+		<ul id="icons">
 		</ul>
 		<div id="loadingscreen">
 			<div id="loadinganim"></div>
