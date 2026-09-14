@@ -441,6 +441,7 @@ code {
 	opacity: 0.97;
 	transition: 1s;
 	overflow: hidden;
+	display: inline-block;
 }
 
 .dticon p {
@@ -624,7 +625,6 @@ h3 {
 
 #galleryroll .imagetile {
 	transform: translateX(var(--translation)) rotateY(30deg);
-	margin: 0px -10px;
 }
 
 #galleryroll .imagetile.imageactive {
@@ -642,6 +642,8 @@ h3 {
 
 .imagetilecontainer {
 	perspective: 500px;
+	-webkit-perspective: 500px;
+	-moz-perspective: 500px;
 	--transform: rotateX(-10deg)rotateY(-30deg)translateY(50%)rotateX(90deg)translateY(-50%);
 	--radius: 0px;
 }
@@ -691,6 +693,8 @@ img {
 	display: flex;
 	height: 100px;
 	perspective: 500px;
+	-webkit-perspective: 500px;
+	-moz-perspective: 500px;
 	align-items: flex-end;
 	justify-content: center;
 	--floor: var(--accent);
@@ -781,10 +785,25 @@ aside:hover::before {
 .photo-thumb {
 	margin-top: 2em;
 	perspective: 500px;
+	-webkit-perspective: 500px;
+	-moz-perspective: 500px;
 	justify-content: center;
 	display: flex;
 }
 
+#photo-download {
+	position: absolute;
+	z-index: 1;
+	right: 0;
+	bottom: -1em;
+	opacity: 0;
+	transition: var(--hover-transition);
+	display: none;
+}
+
+.imagetilecontainer:hover #photo-download {
+	opacity: 1;
+}
 .vbar {
 	width: 0;
 	margin: 20px 0px;

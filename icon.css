@@ -94,6 +94,10 @@
 	background-image: url('/icons/esp.svg');
 }
 
+.icon-download {
+	background-image: url('/icons/download.svg');
+}
+
 .icon-close {
 	cursor: pointer;
 	background-image: url('/icons/close.svg');

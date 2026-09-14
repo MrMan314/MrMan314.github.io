@@ -81,7 +81,7 @@ function show(name) {
 	l = document.getElementsByClassName("active");
 	[].forEach.call(l, (t) => {if (t !== e) t.classList.remove("active")});
 	e.classList.add("active");
-	console.log(max);
+	//console.log(max);
 	e.style.zIndex = max + (e.style.zIndex == max ? 0 : 1);
 }
 
@@ -92,7 +92,7 @@ function hide(name) {
 
 function center(name) {
 	var e = document.getElementById(name);
-	e.style.top = (window.innerHeight-e.offsetHeight)/2;
+	e.style.top = (window.innerHeight-e.offsetHeight)/2 < 0 ? 0 : (window.innerHeight-e.offsetHeight)/2;
 	e.style.left = (window.innerWidth-e.offsetWidth)/2;
 }
 
@@ -217,6 +217,9 @@ async function setPicture(image) {
 			document.getElementById("photo-label").innerHTML=image.split("/").pop();
 			document.getElementById("galleryroll").style.setProperty("--floor", "var(--accent)");
 			document.getElementById("gallery").style.setProperty("--bg-accent", "var(--accent)");
+			document.getElementById("photo-download").href=blobURL;
+			document.getElementById("photo-download").download=image.split("/").pop();
+			document.getElementById("photo-download").style.display="block";
 		} catch (error) {
 			if (error === 'new instance' || error.name == 'AbortError') {
 				content.style.setProperty('--opacity', '0');
@@ -229,6 +232,7 @@ async function setPicture(image) {
 				document.getElementById("photo-label").innerHTML='Error loading image';
 				document.getElementById("galleryroll").style.setProperty("--floor", "var(--accent-error)");
 				document.getElementById("gallery").style.setProperty("--bg-accent", "var(--accent-error)");
+				document.getElementById("photo-download").style.display="";
 			}
 		}
 	}
@@ -284,7 +288,7 @@ function maximize(name) {
 	}
 }
 
-var moveInterval = null;
+var moveTimeout = null;
 
 async function initGallery() {
 	var e = document.getElementById("galleryroll");
@@ -298,20 +302,27 @@ async function initGallery() {
 		tile.classList.add("imagetile");
 		tile.addEventListener("click", tileClick.bind(tile, imageList[i]));
 		function tileClick(name, ev) {
-			if (moveInterval !== null) clearTimeout(moveInterval);
+			if (moveTimeout !== null) clearTimeout(moveTimeout);
 			setPicture("/images/" + name);
 			var l = document.getElementsByClassName("imageactive");
 			[].forEach.call(l, (t) => {if (t !== this) t.classList.remove("imageactive")});
-			this.classList.add("imageactive");
-			tileMove();
-			moveInterval = setTimeout(tileMove, 1000);
-			function tileMove() { // converges within two calls
-				x = document.querySelector("#galleryroll > div.imagetile.imageactive").getBoundingClientRect().x
-				x2 = document.querySelector("#galleryroll").getBoundingClientRect().x
-				w = document.querySelector("#galleryroll > div.imagetile.imageactive").getBoundingClientRect().width
-				w2 = document.querySelector("#galleryroll").getBoundingClientRect().width
-				changeXPos((w2-w)/2+x2-x);
+			let flag = !this.classList.contains("imageactive");
+			if (flag) {
+				this.classList.add("notransition");
+				this.classList.add("imageactive");
 			}
+			x = document.querySelector("#galleryroll > div.imagetile.imageactive").getBoundingClientRect().x
+			w = document.querySelector("#galleryroll > div.imagetile.imageactive").getBoundingClientRect().width
+			x2 = document.querySelector("#galleryroll").getBoundingClientRect().x
+			w2 = document.querySelector("#galleryroll").getBoundingClientRect().width
+			if (flag) this.classList.remove("imageactive");
+			moveTimeout = setTimeout(()=>{
+				if (flag) {
+					this.classList.remove("notransition");
+					this.classList.add("imageactive");
+				}
+				changeXPos((w2-w)/2+x2-x);
+			}, 10);
 		}
 		tile.innerHTML='<img src="/images/' + imageList[i] + '.thumb"/>';
 		e.appendChild(tile);
@@ -338,6 +349,7 @@ async function initGallery() {
 
 	var x, dx = 0, xpos = 0;
 	function galleryDrag(ev) {
+		if (moveTimeout !== null) clearTimeout(moveTimeout);
 		x = (ev.clientX === undefined ? ev.touches[0].clientX : ev.clientX);
 		dx = 0;
 		e.classList.add("notransition");
